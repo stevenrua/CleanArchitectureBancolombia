@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.lang.annotation.Documented;
 import java.util.Date;
 
-public class SupervisorGeneralCreadoDTO implements Serializable {
+public class SupervisorGeneralCreadoDTO {
 
     private String nombre;
 
@@ -23,6 +23,10 @@ public class SupervisorGeneralCreadoDTO implements Serializable {
     private String fechaCreacion;
 
     private Date dateFecha;
+
+    public SupervisorGeneralCreadoDTO() {
+    }
+
     public SupervisorGeneralCreadoDTO(SupervisorGeneralCreado supervisorGeneralCreado){
         this.nombre = supervisorGeneralCreado.getNombre().value().nombre();
         this.area = supervisorGeneralCreado.getNombre().value().area();
@@ -33,7 +37,6 @@ public class SupervisorGeneralCreadoDTO implements Serializable {
         this.dateFecha = supervisorGeneralCreado.getFechaCreacion().value().date();
 
     }
-
     public String getNombre() {
         return this.nombre;
     }

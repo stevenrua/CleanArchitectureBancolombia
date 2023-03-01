@@ -1,4 +1,4 @@
-package co.com.storecar.mongo.generic.serializer;
+package co.com.storecar.serializer;
 
 public interface JSONMapper {
     String writeToJson(Object object);

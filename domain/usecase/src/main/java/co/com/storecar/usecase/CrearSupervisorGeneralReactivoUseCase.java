@@ -1,5 +1,6 @@
 package co.com.storecar.usecase;
 
+import co.com.storecar.usecase.gateways.EventBus;
 import co.com.storecar.usecase.generic.USeCaseForCommand;
 import co.com.storecar.usecase.gateways.DomainEventRepository;
 import co.com.storecar.model.SupervisorGeneral;
@@ -10,10 +11,12 @@ import reactor.core.publisher.*;
 
 public class CrearSupervisorGeneralReactivoUseCase extends USeCaseForCommand<CrearSupervisorGeneral> {
 
-    private final DomainEventRepository repository;
+    private DomainEventRepository repository;
+    private EventBus bus;
 
-    public CrearSupervisorGeneralReactivoUseCase(DomainEventRepository repository) {
+    public CrearSupervisorGeneralReactivoUseCase(DomainEventRepository repository, EventBus bus) {
         this.repository = repository;
+        this.bus = bus;
     }
 
     @Override
@@ -26,9 +29,10 @@ public class CrearSupervisorGeneralReactivoUseCase extends USeCaseForCommand<Cre
                     new Nombre(command.getNombreTablero(), command.getAreaTablero()),
                     new FechaCreacion(command.getFechaCreacion()));
                     return supervisorGeneral.getUncommittedChanges();
-                });/*.flatMap(domainEvent -> repository.saveEvent(domainEvent));/*.map(event->{
-                    bus.publish(event);
-                    return event;
-                });*/
+                }).flatMap(domainEvent -> repository.saveEvent(domainEvent))
+                .map(domainEvent->{
+                    bus.publish(domainEvent);
+                    return domainEvent;
+                });
     }
 }

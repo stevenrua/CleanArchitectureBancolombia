@@ -11,6 +11,9 @@ public class SupervisorGeneralCreado extends DomainEvent {
     private Nombre nombreTablero;
     private FechaCreacion fechaCreacion;
 
+    public SupervisorGeneralCreado() {
+        super("storecar.supervisorgeneralcreado");
+    }
 
     public SupervisorGeneralCreado(Nombre nombre, TableroTareasID tableroTareasID, Nombre nombreTablero, FechaCreacion fechaCreacion) {
         super("storecar.supervisorgeneralcreado");

@@ -16,10 +16,10 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 
 @Configuration
 public class RouterRest {
-    //private ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper = new ObjectMapper();
     @Bean
     public RouterFunction<ServerResponse> routerFunction(CrearSupervisorGeneralReactivoUseCase usecase) {
-        //mapper.registerModule(new JavaTimeModule());
+        mapper.registerModule(new JavaTimeModule());
         return route(POST("/api/usecase/crearsupervisorgeneral2"), request -> {
             return usecase
                     .apply(request.bodyToMono(CrearSupervisorGeneral.class))
@@ -27,7 +27,7 @@ public class RouterRest {
                     .flatMap(event-> {
                         SupervisorGeneralCreadoDTO eventoDTO = new SupervisorGeneralCreadoDTO((SupervisorGeneralCreado) event.get(0));
                         //SupervisorGeneralCreadoDTO eventoDTO = new SupervisorGeneralCreadoDTO();
-                                return ServerResponse.ok().bodyValue(eventoDTO);
+                                return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(eventoDTO);
                     }
                     );
         });

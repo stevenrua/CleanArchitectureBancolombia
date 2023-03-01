@@ -14,6 +14,12 @@ spring:
   data:
     mongodb:
       uri: "mongodb+srv://stevenrua:stevenrua9210@cluster0.pfmkpjo.mongodb.net/Events?retryWrites=true&w=majority"
+  rabbitmq:
+    host: "rabbit"
+    username: "guest"
+    password: "guest"
+    virtual_host: /
+    port: 5672
 management:
   endpoints:
     web:
@@ -23,3 +29,13 @@ management:
     health:
       probes:
         enabled: true
+commons:
+  jms:
+    input-concurrency: 10
+    input-queue: "DEV.QUEUE.2"
+    input-queue-alias: ""
+    reactive: true
+ibm:
+  mq:
+    channel: "DEV.APP.SVRCONN"
+    user: "app"

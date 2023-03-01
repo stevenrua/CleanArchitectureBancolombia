@@ -1,6 +1,4 @@
 dependencies {
     implementation project(':model')
-    //implementation project(':mongo-repository')
-    //implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core'
 
 }
